@@ -16,3 +16,5 @@ export const GET_USER_FAIL = 'GET_USER_FAIL';
 export const FETCH_LIST_SUCCESS = 'FETCH_LIST_SUCCESS';
 export const FETCH_LIST_FAIL = 'FETCH_LIST_FAIL';
 export const GO_TO_PAGE = 'GO_TO_PAGE'
+export const FETCH_SEARCH = 'FETCH_SEARCH'
+export const SUBMIT_SEARCH = 'SUBMIT_SEARCH'

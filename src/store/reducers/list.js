@@ -1,4 +1,4 @@
-import { FETCH_LIST_SUCCESS, FETCH_LIST_FAIL, GO_TO_PAGE } from '../actions/types';
+import { FETCH_LIST_SUCCESS, FETCH_LIST_FAIL, GO_TO_PAGE, FETCH_SEARCH, SUBMIT_SEARCH } from '../actions/types';
 import { changePage } from '../../components/misc/changePage';
 
 const initialState = {
@@ -7,13 +7,13 @@ const initialState = {
 	data: [],
 	pages: null,
 	currentPage: 2,
-	pageSize: 5
+	pageSize: 5,
+	search: ''
 };
 
 const reducer = (state = initialState, action) => {
 	const { type, payload } = action;
 	switch (type) {
-
 		case FETCH_LIST_SUCCESS: {
 			const data = [ ...payload ];
 			const pages = Math.ceil(data.length / state.pageSize);
@@ -29,7 +29,24 @@ const reducer = (state = initialState, action) => {
 			const list = changePage(payload, state.pageSize, state.data);
 			return { ...state, currentPage: payload, list };
 		}
-		
+
+		case FETCH_SEARCH: {
+			return { ...state, search: payload };
+		}
+
+		case SUBMIT_SEARCH: {
+			const arr = [ ...state.data ];
+
+			const data = arr.filter(
+				(item) =>
+					item.title.toLowerCase().indexOf(state.search.toLowerCase()) !== -1 ||
+					item.text.split(' ').findIndex((item) => item.toLowerCase() === state.search.toLowerCase()) !== -1
+			);
+			const pages = Math.ceil(data.length / state.pageSize);
+			const list = changePage(1, state.pageSize, data);
+			return { ...state, list, pages, currentPage: 1 };
+		}
+
 		default:
 			return state;
 	}

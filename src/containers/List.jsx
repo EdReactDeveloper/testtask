@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import List from '../components/List';
 import { connect } from 'react-redux';
-import { fetchListAction, goToPageAction } from '../store/actions/list';
-import Pages from '../components/List/Pages'; 
+import {
+  fetchListAction,
+  goToPageAction,
+  fetchSearchAction,
+  submitSearchAction
+} from '../store/actions/list';
+import Pages from '../components/List/Pages';
+import Search from '../components/List/Search';
 
 class ListContainer extends Component {
   componentDidMount() {
@@ -10,14 +16,44 @@ class ListContainer extends Component {
     fetchListAction()
   }
 
+  submitSearch = e => {
+    e.preventDefault()
+    const { submitSearchAction } = this.props
+    submitSearchAction()
+  }
+
   render() {
-    const { list, isLoading, pages, goToPageAction, currentPage } = this.props
-     
+    const {
+      list,
+      isLoading,
+      search,
+      pages,
+      goToPageAction,
+      currentPage,
+      fetchSearchAction
+    } = this.props
+
     return (
-    <>
-    <List list={list} isLoading={isLoading} />
-    {pages && <Pages pages={pages} currentPage={currentPage} goToPageAction={goToPageAction}/>}
-    </>
+      <>
+        <Search
+          search={search}
+          fetchSearchAction={fetchSearchAction}
+          submitSearch={this.submitSearch}
+
+        />
+        <List
+          list={list}
+          isLoading={isLoading}
+        />
+        {
+          pages &&
+          <Pages
+            pages={pages}
+            currentPage={currentPage}
+            goToPageAction={goToPageAction}
+          />
+        }
+      </>
     )
   }
 }
@@ -26,7 +62,8 @@ const mapStateToProps = state => ({
   list: state.list.list,
   isLoading: state.list.isLoading,
   pages: state.list.pages,
-  currentPage: state.list.currentPage
+  currentPage: state.list.currentPage,
+  search: state.list.search
 })
 
-export default connect(mapStateToProps, { fetchListAction, goToPageAction })(ListContainer);
+export default connect(mapStateToProps, { fetchListAction, goToPageAction, fetchSearchAction, submitSearchAction })(ListContainer);
