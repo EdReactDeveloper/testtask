@@ -1,4 +1,4 @@
-import { FETCH_LIST_SUCCESS, FETCH_LIST_FAIL } from './types';
+import { FETCH_LIST_SUCCESS, FETCH_LIST_FAIL, GO_TO_PAGE } from './types';
 import axios from 'axios';
 
 export const fetchListAction = () => async (dispatch) => {
@@ -16,3 +16,10 @@ export const fetchListAction = () => async (dispatch) => {
 		});
 	}
 };
+
+export const goToPageAction = (number)=> dispatch=>{
+	dispatch({
+		type: GO_TO_PAGE,
+		payload: number
+	})
+}

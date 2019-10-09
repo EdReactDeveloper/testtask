@@ -25,6 +25,7 @@ const initialState = {
 const reducer = (state = initialState, action) => {
 	const { type, payload } = action;
 	switch (type) {
+
 		case FORM_FIELD: {
 			const element = {...state[payload.key]} 
 			element.touched = false
@@ -33,6 +34,7 @@ const reducer = (state = initialState, action) => {
 			element.error = validate(element)[1]
 			return { ...state, [payload.key]: element };
 		}
+
 		case TOUCHED: {
 			const element = {...state[payload]}
 			element.isValid = validate(element)[0]
@@ -40,6 +42,7 @@ const reducer = (state = initialState, action) => {
 			element.touched = true
 			return {...state, [payload]: element}
 		}
+		
 		default:
 			return state;
 	}

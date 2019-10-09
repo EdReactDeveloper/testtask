@@ -25,7 +25,6 @@ export const getUserAction = (loggedIn) => (dispatch) => {
 
 export const loginAction = (data, history) => (dispatch) => {
 	const token = JSON.parse(localStorage.getItem('token'));
-
 	try {
 		if (data === token) {
 			localStorage.setItem('loggedIn', true);

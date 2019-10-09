@@ -9,7 +9,7 @@ const LoginForm = ({ fieldHandler, form, submitHandler, touchHandler }) => {
 
       {form && form.map(item => {
         if (item.type === 'password2') {
-          return <></>
+          return '';
         }
         return <Formfield
           key={item.type}
