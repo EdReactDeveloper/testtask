@@ -1,18 +1,24 @@
 import React from 'react';
-import Field from '../../misc/Field';
 import { Form, Button } from 'react-bootstrap';
+import Formfield from '../FormField';
 
-const LoginForm = ({ filedHandler, form, submitHandler }) => {
+const LoginForm = ({ fieldHandler, form, submitHandler, touchHandler }) => {
   return (
     <Form onSubmit={submitHandler}>
-      <Form.Group controlId="formGroupEmail">
-        <Form.Label>Email address</Form.Label>
-        <Field name='email' value={form['email']} onChangeHandler={filedHandler} />
-      </Form.Group>
-      <Form.Group controlId="formGroupPassword">
-        <Form.Label>Password</Form.Label>
-        <Field name='password' value={form['password']} onChangeHandler={filedHandler} />
-      </Form.Group>
+      <h3>Login</h3>
+
+      {form && form.map(item => {
+        if (item.type === 'password2') {
+          return <></>
+        }
+        return <Formfield
+          key={item.type}
+          field={item} form={form}
+          fieldHandler={fieldHandler}
+          touchHandler={touchHandler}
+        />
+      })
+      }
       <Button variant="primary" type="submit">
         Submit
       </Button>

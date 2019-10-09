@@ -9,13 +9,14 @@ class ListContainer extends Component {
     fetchListAction()
   }
   render() {
-    const { list } = this.props
-    return <List list={list} />
+    const { list, isLoading } = this.props
+    return <List list={list} isLoading={isLoading} />
   }
 }
 
 const mapStateToProps = state => ({
-  list: state.list.list
+  list: state.list.list,
+  isLoading: state.list.isLoading
 })
 
 export default connect(mapStateToProps, { fetchListAction })(ListContainer);

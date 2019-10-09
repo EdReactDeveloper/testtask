@@ -4,13 +4,15 @@ import { connect } from 'react-redux';
 import { formFieldAction } from '../store/actions/form';
 import { registerAction } from '../store/actions/auth';
 import { hashIt } from '../components/misc/hash';
+import {touchAction} from '../store/actions/form'; 
+import {toArray} from '../components/misc/toArray';
 
 class RegisterContainer extends Component {
 
   submitHandler = e => {
     e.preventDefault()
     const { form, registerAction, history } = this.props
-    if (form.password.toString() === form.password2.toString()) {
+    if (form.password.value.toString() === form.password2.value.toString()) {
       const password = hashIt(form.password)
       const email = hashIt(form.email)
       const data = email + password
@@ -21,7 +23,7 @@ class RegisterContainer extends Component {
   }
 
 
-  filedHandler = e => {
+  fieldHandler = e => {
     const { formFieldAction } = this.props
     const key = e.target.name
     const value = e.target.value
@@ -29,11 +31,12 @@ class RegisterContainer extends Component {
   }
 
   render() {
-    const { form } = this.props
+    const { form, touchAction } = this.props
     return <Register
       submitHandler={this.submitHandler}
-      filedHandler={this.filedHandler}
-      form={form}
+      fieldHandler={this.fieldHandler}
+      form={toArray(form)}
+      touchHandler={touchAction}
     />
   }
 }
@@ -42,4 +45,4 @@ const mapStateToProps = state => ({
   form: state.form
 })
 
-export default connect(mapStateToProps, { formFieldAction, registerAction })(RegisterContainer);
+export default connect(mapStateToProps, { formFieldAction, registerAction, touchAction })(RegisterContainer);
