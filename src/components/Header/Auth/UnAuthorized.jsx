@@ -1,16 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import style from './Auth.module.scss'; 
 
 const UnAuthorized = () => {
   return (
-    <div>
-      <div>
-        <Link to='/login'>login</Link>
-      </div>
-      <div>
-        <Link to='/register'>register</Link>
-      </div>
-    </div>
+    <>
+      <Link className={style.btn} to='/login'>login</Link>
+      <Link className={style.btn} to='/register'>register</Link>
+    </>
   );
 };
 

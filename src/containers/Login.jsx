@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { formFieldAction } from '../store/actions/form'
 import { loginAction } from '../store/actions/auth';
 import { hashIt } from '../components/misc/hash';
-class LoginContainer extends Component {
 
+class LoginContainer extends Component {
 
   submitHandler = e => {
     e.preventDefault()
@@ -13,7 +13,6 @@ class LoginContainer extends Component {
     const email = hashIt(form.email)
     const password = hashIt(form.password)
     const data = email + password
-    console.log('data ', data, 'token ', token)
     if (data === token) {
       loginAction(data, history)
     } else {
