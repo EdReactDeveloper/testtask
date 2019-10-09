@@ -21,7 +21,37 @@ const initialState = {
 const reducer = (state = initialState, action) => {
 	const { type, payload } = action;
 	switch (type) {
-	
+		case LOGIN_SUCCESS: {
+			return { ...state, isAuthorized: true, loginData: payload, isLoading: false };
+		}
+		case REGISTER_SUCCESS: {
+			return {
+				...state,
+				isRegistered: true,
+				isLoading: false,
+				token: payload
+			};
+		}
+		
+		case GET_USER_SUCCESS: {
+			return {
+				...state,
+				isAuthorized: payload.loggedIn,
+				token: payload.token,
+				isLoading: false
+			};
+		}
+
+		case LOGOUT_SUCCESS: {
+			return {
+				...state, isAuthorized: false
+			}
+		}
+		case LOGIN_FAIL:
+		case GET_USER_FAIL:
+		case REGISTER_FAIL: {
+			return { ...state, isAuthorized: false, isLoading: false };
+		}
 		default:
 			return state;
 	}

@@ -1,10 +1,13 @@
 import React from 'react';
+import Field from '../../misc/Field';
 
-const LoginForm = () => {
+const LoginForm = ({ filedHandler, form, submitHandler }) => {
   return (
-    <form  >
-    
-  </form>
+    <form onSubmit={submitHandler} >
+      <Field name='email' value={form['email']} onChangeHandler={filedHandler} />
+      <Field name='password' value={form['password']} onChangeHandler={filedHandler} />
+      <button type='submit'>login</button>
+    </form>
   );
 };
 
