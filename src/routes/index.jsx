@@ -5,6 +5,7 @@ import Login from '../containers/Login';
 import Register from '../containers/Register'; 
 import PrivateRoute from './PrivateRoute'; 
 import {connect} from 'react-redux'; 
+import List from  '../containers/List'; 
 
 const Routes = ({isAuthorized}) => {
   return (
@@ -13,8 +14,7 @@ const Routes = ({isAuthorized}) => {
       <Switch>
         <Route exact path='/login' component={Login}/>
         <Route exact path='/register' component={Register}/>
-      
-
+        <PrivateRoute exact path='/' isAuthorized={isAuthorized} component={List}/>
       </Switch>
     </Router>
   );
