@@ -1,7 +1,8 @@
 import React from 'react';
+import {Button} from 'react-bootstrap'; 
 
 const Authorized = ({ logoutHandler }) => {
-  return <button onClick={logoutHandler}>logout</button>
+  return <Button variant="light" onClick={logoutHandler}>logout</Button>
 };
 
 export default Authorized;
