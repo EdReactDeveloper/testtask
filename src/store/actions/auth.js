@@ -27,7 +27,7 @@ export const loginAction = (data, history) => (dispatch) => {
 	const token = JSON.parse(localStorage.getItem('token'));
 
 	try {
-		if (data == token) {
+		if (data === token) {
 			localStorage.setItem('loggedIn', true);
 			dispatch({
 				type: LOGIN_SUCCESS,
