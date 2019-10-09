@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { formFieldAction } from '../store/actions/form';
 import { registerAction } from '../store/actions/auth';
 import { hashIt } from '../components/misc/hash';
-import {touchAction} from '../store/actions/form'; 
-import {toArray} from '../components/misc/toArray';
+import { touchAction } from '../store/actions/form';
+import { toArray } from '../components/misc/toArray';
 
 class RegisterContainer extends Component {
 
@@ -13,8 +13,8 @@ class RegisterContainer extends Component {
     e.preventDefault()
     const { form, registerAction, history } = this.props
     if (form.password.value.toString() === form.password2.value.toString()) {
-      const password = hashIt(form.password)
-      const email = hashIt(form.email)
+      const password = hashIt(form.password.value)
+      const email = hashIt(form.email.value)
       const data = email + password
       registerAction(data, history)
     } else {

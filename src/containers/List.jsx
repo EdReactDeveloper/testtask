@@ -46,12 +46,12 @@ class ListContainer extends Component {
           isLoading={isLoading}
         />
         {
-          pages &&
+          pages > 0 &&
           <Pages
             pages={pages}
             currentPage={currentPage}
             goToPageAction={goToPageAction}
-          />
+          /> 
         }
       </>
     )

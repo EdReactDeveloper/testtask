@@ -2,11 +2,11 @@ import { FETCH_LIST_SUCCESS, FETCH_LIST_FAIL, GO_TO_PAGE, FETCH_SEARCH, SUBMIT_S
 import { changePage } from '../../components/misc/changePage';
 
 const initialState = {
-	list: [],
+	list: null,
 	isLoading: true,
 	data: [],
 	pages: null,
-	currentPage: 2,
+	currentPage: 1,
 	pageSize: 5,
 	search: ''
 };
@@ -31,16 +31,15 @@ const reducer = (state = initialState, action) => {
 		}
 
 		case FETCH_SEARCH: {
-			return { ...state, search: payload };
+			return { ...state, search: payload.trim() };
 		}
 
 		case SUBMIT_SEARCH: {
 			const arr = [ ...state.data ];
-
 			const data = arr.filter(
 				(item) =>
 					item.title.toLowerCase().indexOf(state.search.toLowerCase()) !== -1 ||
-					item.text.split(' ').findIndex((item) => item.toLowerCase() === state.search.toLowerCase()) !== -1
+					item.text.toLowerCase().search(state.search.toLowerCase()) !== -1
 			);
 			const pages = Math.ceil(data.length / state.pageSize);
 			const list = changePage(1, state.pageSize, data);
