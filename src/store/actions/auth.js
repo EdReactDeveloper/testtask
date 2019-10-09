@@ -9,22 +9,22 @@ import {
 	LOGOUT_FAIL
 } from '../actions/types';
 
-export const getUserAction = (loggedIn) => dispatch=>{
-	const token = JSON.parse(localStorage.getItem('token'))
+export const getUserAction = (loggedIn) => (dispatch) => {
+	const token = JSON.parse(localStorage.getItem('token'));
 	try {
 		dispatch({
 			type: GET_USER_SUCCESS,
-			payload: {loggedIn, token}
+			payload: { loggedIn, token }
 		});
 	} catch (error) {
 		dispatch({
 			type: GET_USER_FAIL
 		});
 	}
-}
+};
 
-export const loginAction = (data, history) => dispatch=>{
-  const token = JSON.parse(localStorage.getItem('token'));
+export const loginAction = (data, history) => (dispatch) => {
+	const token = JSON.parse(localStorage.getItem('token'));
 
 	try {
 		if (data == token) {
@@ -33,33 +33,33 @@ export const loginAction = (data, history) => dispatch=>{
 				type: LOGIN_SUCCESS,
 				payload: data
 			});
-			history.push('/')
+			history.push('/');
 		}
 	} catch (error) {
 		dispatch({
 			type: LOGIN_FAIL
 		});
 	}
-}
+};
 
-export const registerAction = (data, history) => dispatch=>{
-  localStorage.setItem('token', data);
+export const registerAction = (data, history) => (dispatch) => {
+	localStorage.setItem('token', data);
 	try {
 		dispatch({
 			type: REGISTER_SUCCESS,
 			payload: data
 		});
-		history.push('/login')
+		history.push('/login');
 	} catch (error) {
 		dispatch({
 			type: REGISTER_FAIL
 		});
 	}
-}
+};
 
-export const logoutAction = () => dispatch=>{
+export const logoutAction = () => (dispatch) => {
 	try {
-		localStorage.setItem('loggedIn', false)
+		localStorage.setItem('loggedIn', false);
 		dispatch({
 			type: LOGOUT_SUCCESS
 		});
@@ -68,4 +68,4 @@ export const logoutAction = () => dispatch=>{
 			type: LOGOUT_FAIL
 		});
 	}
-}
+};

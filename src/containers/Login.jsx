@@ -1,28 +1,28 @@
 import React, { Component } from 'react';
-import Login from '../components/Auth/LoginForm'; 
-import {connect} from 'react-redux'; 
+import Login from '../components/Auth/LoginForm';
+import { connect } from 'react-redux';
 import { formFieldAction } from '../store/actions/form'
 import { loginAction } from '../store/actions/auth';
-import {hashIt} from '../components/misc/hash'; 
+import { hashIt } from '../components/misc/hash';
 class LoginContainer extends Component {
 
-  
-  submitHandler = e=>{
+
+  submitHandler = e => {
     e.preventDefault()
     const { loginAction, form, token, history } = this.props
     const email = hashIt(form.email)
     const password = hashIt(form.password)
-    const data = email+password
+    const data = email + password
     console.log('data ', data, 'token ', token)
-    if(data === token ){
+    if (data === token) {
       loginAction(data, history)
-    }else{
+    } else {
       alert('wrong credentials')
     }
   }
 
 
-  filedHandler = e =>{
+  filedHandler = e => {
     const { formFieldAction } = this.props
     const key = e.target.name
     const value = e.target.value
@@ -31,8 +31,8 @@ class LoginContainer extends Component {
 
   render() {
     const { form } = this.props
-    return <Login 
-    filedHandler={this.filedHandler}
+    return <Login
+      filedHandler={this.filedHandler}
       form={form}
       submitHandler={this.submitHandler}
     />
@@ -44,4 +44,4 @@ const mapStateToProps = state => ({
   token: state.auth.token
 })
 
-export default connect(mapStateToProps, {formFieldAction, loginAction})(LoginContainer);
+export default connect(mapStateToProps, { formFieldAction, loginAction })(LoginContainer);

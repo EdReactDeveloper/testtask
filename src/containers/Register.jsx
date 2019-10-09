@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import Register from '../components/Auth/RegisterForm'; 
-import {connect} from 'react-redux'; 
+import Register from '../components/Auth/RegisterForm';
+import { connect } from 'react-redux';
 import { formFieldAction } from '../store/actions/form';
 import { registerAction } from '../store/actions/auth';
 import { hashIt } from '../components/misc/hash';
 
 class RegisterContainer extends Component {
 
-  submitHandler = e=>{
+  submitHandler = e => {
     e.preventDefault()
     const { form, registerAction, history } = this.props
     if (form.password.toString() === form.password2.toString()) {
@@ -21,7 +21,7 @@ class RegisterContainer extends Component {
   }
 
 
-  filedHandler = e =>{
+  filedHandler = e => {
     const { formFieldAction } = this.props
     const key = e.target.name
     const value = e.target.value
@@ -30,10 +30,10 @@ class RegisterContainer extends Component {
 
   render() {
     const { form } = this.props
-    return <Register 
-    submitHandler={this.submitHandler}
-    filedHandler={this.filedHandler}
-    form={form}
+    return <Register
+      submitHandler={this.submitHandler}
+      filedHandler={this.filedHandler}
+      form={form}
     />
   }
 }
@@ -42,4 +42,4 @@ const mapStateToProps = state => ({
   form: state.form
 })
 
-export default connect(mapStateToProps, {formFieldAction, registerAction})(RegisterContainer);
+export default connect(mapStateToProps, { formFieldAction, registerAction })(RegisterContainer);

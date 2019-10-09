@@ -1,8 +1,8 @@
-import {FORM_FIELD} from './types'
+import { FORM_FIELD } from './types';
 
-export const formFieldAction = (key, value)=> dispatch=>{
-  dispatch({
-    type: FORM_FIELD, 
-    payload: {key, value}
-  })
-}
+export const formFieldAction = (key, value) => (dispatch) => {
+	dispatch({
+		type: FORM_FIELD,
+		payload: { key, value }
+	});
+};
