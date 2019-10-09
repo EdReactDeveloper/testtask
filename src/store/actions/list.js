@@ -3,14 +3,13 @@ import axios from 'axios';
 
 export const fetchListAction = () => async (dispatch) => {
 	try {
-		const result = await axios.get('http://www.mocky.io/v2/5d5c36f03200007800628dbc/');
-		let res = JSON.stringify(result.data);
-		res = JSON.parse(res);
-
-		dispatch({
-			type: FETCH_LIST_SUCCESS,
-			payload: result.data
-		});
+		const result = await axios.get('http://www.mocky.io/v2/5d9dc38e3200004e00329939');
+		if (result.data.status === 'ok') {
+			dispatch({
+				type: FETCH_LIST_SUCCESS,
+				payload: result.data.data
+			});
+		}
 	} catch (error) {
 		dispatch({
 			type: FETCH_LIST_FAIL
