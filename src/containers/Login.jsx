@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Login from '../components/Auth/LoginForm'; 
+import {connect} from 'react-redux'; 
 
 class LoginContainer extends Component {
   render() {
@@ -7,4 +8,8 @@ class LoginContainer extends Component {
   }
 }
 
-export default LoginContainer;
+const mapStateToProps = state => ({
+
+})
+
+export default connect(mapStateToProps)(LoginContainer);

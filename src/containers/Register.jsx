@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Register from '../components/Auth/RegisterForm'; 
+import {connect} from 'react-redux'; 
 
 class RegisterContainer extends Component {
   render() {
@@ -7,4 +8,8 @@ class RegisterContainer extends Component {
   }
 }
 
-export default RegisterContainer;
+const mapStateToProps = state => ({
+
+})
+
+export default connect(mapStateToProps)(RegisterContainer);
