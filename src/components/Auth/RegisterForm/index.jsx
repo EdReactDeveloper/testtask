@@ -1,10 +1,11 @@
 import React from 'react';
 
-const RegisterForm = () => {
+
+const RegisterForm = ({ submitHandler, filedHandler, form }) => {
   return (
-    <div>
-      
-    </div>
+    <form  >
+     
+    </form>
   );
 };
 
