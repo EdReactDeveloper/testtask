@@ -4,7 +4,8 @@ import {
 	GO_TO_PAGE,
 	FETCH_SEARCH,
 	SUBMIT_SEARCH,
-	SORTBY
+	SORTBY,
+	CHANGE_PAGE_SIZE
 } from './types';
 import axios from 'axios';
 
@@ -54,3 +55,11 @@ export const sortAction = (sortby) => dispatch =>{
 		console.log(error)
 	}
 } 
+
+export const changePageSizeAction = (size) => dispatch =>{
+	
+	dispatch({
+		type: CHANGE_PAGE_SIZE,
+		payload: size		
+	})
+}
