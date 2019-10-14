@@ -26,6 +26,7 @@ export const fetchListAction = () => async (dispatch) => {
 };
 
 export const goToPageAction = (number)=> dispatch=>{
+
 	dispatch({
 		type: GO_TO_PAGE,
 		payload: number
@@ -60,6 +61,6 @@ export const changePageSizeAction = (size) => dispatch =>{
 	
 	dispatch({
 		type: CHANGE_PAGE_SIZE,
-		payload: size		
+		payload: Number(size)		
 	})
 }

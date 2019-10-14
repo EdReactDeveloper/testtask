@@ -1,4 +1,12 @@
-import { FETCH_LIST_SUCCESS, FETCH_LIST_FAIL, GO_TO_PAGE, FETCH_SEARCH, SUBMIT_SEARCH, SORTBY, CHANGE_PAGE_SIZE } from '../actions/types';
+import { 
+	FETCH_LIST_SUCCESS, 
+	FETCH_LIST_FAIL, 
+	GO_TO_PAGE, 
+	FETCH_SEARCH, 
+	SUBMIT_SEARCH, 
+	SORTBY, 
+	CHANGE_PAGE_SIZE 
+} from '../actions/types';
 import { changePage } from '../../components/misc/changePage';
 
 const initialState = {
@@ -8,7 +16,7 @@ const initialState = {
 	pages: null,
 	currentPage: 1,
 	pageSize: 5,
-	search: ''
+	search: '',
 };
 
 const reducer = (state = initialState, action) => {
@@ -26,12 +34,14 @@ const reducer = (state = initialState, action) => {
 		}
 
 		case GO_TO_PAGE: {
-			const list = changePage(payload, state.pageSize, state.data);
-			return { ...state, currentPage: payload, list };
+			const data = [...state.data]
+			const currentPage = payload
+			const list = changePage(currentPage, state.pageSize, data);
+			return { ...state, currentPage: currentPage, list };
 		}
 
 		case FETCH_SEARCH: {
-			return { ...state, search: payload.trim() };
+			return { ...state, search: payload	 };
 		}
 
 		case SUBMIT_SEARCH: {
@@ -54,6 +64,7 @@ const reducer = (state = initialState, action) => {
 				...state, data, list
 			}
 		}
+
 		case CHANGE_PAGE_SIZE: {
 			const data = [...state.data]
 			const pageSize = payload
@@ -63,7 +74,6 @@ const reducer = (state = initialState, action) => {
 				...state, pageSize: payload, pages, list, pageSize
 			}
 		}
-	
 
 		default:
 			return state;
