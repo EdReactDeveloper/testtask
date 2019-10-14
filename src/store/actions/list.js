@@ -3,7 +3,8 @@ import {
 	FETCH_LIST_FAIL, 
 	GO_TO_PAGE,
 	FETCH_SEARCH,
-	SUBMIT_SEARCH
+	SUBMIT_SEARCH,
+	SORTBY
 } from './types';
 import axios from 'axios';
 
@@ -42,3 +43,14 @@ export const submitSearchAction = () => dispatch =>{
 		type: SUBMIT_SEARCH
 	})
 }
+
+export const sortAction = (sortby) => dispatch =>{
+	try {
+		dispatch({
+			type: SORTBY,
+			payload: sortby
+		})
+	} catch (error) {
+		console.log(error)
+	}
+} 

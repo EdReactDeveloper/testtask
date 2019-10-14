@@ -5,7 +5,8 @@ import {
   fetchListAction,
   goToPageAction,
   fetchSearchAction,
-  submitSearchAction
+  submitSearchAction,
+  sortAction
 } from '../store/actions/list';
 import Pages from '../components/List/Pages';
 import Search from '../components/List/Search';
@@ -30,7 +31,8 @@ class ListContainer extends Component {
       pages,
       goToPageAction,
       currentPage,
-      fetchSearchAction
+      fetchSearchAction,
+      sortAction
     } = this.props
 
     return (
@@ -39,7 +41,7 @@ class ListContainer extends Component {
           search={search}
           fetchSearchAction={fetchSearchAction}
           submitSearch={this.submitSearch}
-
+          sortAction={sortAction}
         />
         <List
           list={list}
@@ -66,4 +68,4 @@ const mapStateToProps = state => ({
   search: state.list.search
 })
 
-export default connect(mapStateToProps, { fetchListAction, goToPageAction, fetchSearchAction, submitSearchAction })(ListContainer);
+export default connect(mapStateToProps, { fetchListAction, goToPageAction, fetchSearchAction, submitSearchAction, sortAction })(ListContainer);

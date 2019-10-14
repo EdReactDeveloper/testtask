@@ -1,4 +1,4 @@
-import { FETCH_LIST_SUCCESS, FETCH_LIST_FAIL, GO_TO_PAGE, FETCH_SEARCH, SUBMIT_SEARCH } from '../actions/types';
+import { FETCH_LIST_SUCCESS, FETCH_LIST_FAIL, GO_TO_PAGE, FETCH_SEARCH, SUBMIT_SEARCH, SORTBY } from '../actions/types';
 import { changePage } from '../../components/misc/changePage';
 
 const initialState = {
@@ -44,6 +44,16 @@ const reducer = (state = initialState, action) => {
 			const pages = Math.ceil(data.length / state.pageSize);
 			const list = changePage(1, state.pageSize, data);
 			return { ...state, list, pages, currentPage: 1 };
+		}
+
+		case SORTBY: {
+			const data = [...state.data]
+			data.sort((a,b) => (a[payload] > b[payload]) ? 1: -1 )
+			const list = changePage(state.currentPage, state.pageSize, data);
+			
+			return {
+				...state, data, list
+			}
 		}
 
 		default:
