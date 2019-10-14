@@ -69,9 +69,10 @@ const reducer = (state = initialState, action) => {
 			const data = [...state.data]
 			const pageSize = payload
 			const pages = Math.ceil(data.length / pageSize);
-			const list = changePage(state.currentPage, pageSize, data);
+			const currentPage = state.currentPage > pages ? pages : state.currentPage
+			const list = changePage(currentPage, pageSize, data);
 			return {
-				...state, pageSize: payload, pages, list, pageSize
+				...state, pageSize: payload, pages, list, pageSize, currentPage
 			}
 		}
 
