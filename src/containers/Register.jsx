@@ -12,14 +12,11 @@ class RegisterContainer extends Component {
   submitHandler = e => {
     e.preventDefault()
     const { form, registerAction, history } = this.props
-    if (form.password.value.toString() === form.password2.value.toString()) {
-      const password = hashIt(form.password.value)
-      const email = hashIt(form.email.value)
-      const data = email + password
-      registerAction(data, history)
-    } else {
-      alert('passwords should match')
-    }
+    const password = form.password.value
+    const password2 = form.password2.value
+    const email = form.email.value
+    const payload = { email, password, password2 }
+    registerAction(payload, history)
   }
 
 

@@ -14,7 +14,8 @@ const initialState = {
 	isLoading: true,
 	isRegistered: false,
 	token: null,
-	loginData: null
+	loginData: null,
+	db: []
 };
 
 const reducer = (state = initialState, action) => {

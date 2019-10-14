@@ -11,16 +11,8 @@ class LoginContainer extends Component {
 
   submitHandler = e => {
     e.preventDefault()
-    const { loginAction, form, token, history } = this.props
-    const email = hashIt(form.email.value)
-    const password = hashIt(form.password.value)
-    const data = email + password
-    const isValid = checkFields(form)
-    if (data === token && isValid) {
-      loginAction(data, history)
-    } else {
-      alert('wrong credentials')
-    }
+    const { loginAction, form, history } = this.props
+      loginAction(form.email.value, form.password.value, history)
   }
 
   fieldHandler = e => {

@@ -23,16 +23,21 @@ export const getUserAction = (loggedIn) => (dispatch) => {
 	}
 };
 
-export const loginAction = (data, history) => (dispatch) => {
-	const token = JSON.parse(localStorage.getItem('token'));
+export const loginAction = (email, password, history) => (dispatch) => {
 	try {
-		if (data === token) {
+		const db = JSON.parse(localStorage.getItem('db'));
+		const allowed = db.findIndex(item => item.email === email && item.password === password) !== -1
+		if (allowed) {
 			localStorage.setItem('loggedIn', true);
+			const token = JSON.stringify(db)
+			localStorage.setItem('token', token);
 			dispatch({
 				type: LOGIN_SUCCESS,
-				payload: data
+				payload: db
 			});
 			history.push('/');
+		}else{
+			alert('wrong credentials')
 		}
 	} catch (error) {
 		dispatch({
@@ -41,18 +46,29 @@ export const loginAction = (data, history) => (dispatch) => {
 	}
 };
 
-export const registerAction = (data, history) => (dispatch) => {
-	localStorage.setItem('token', data);
-	try {
-		dispatch({
-			type: REGISTER_SUCCESS,
-			payload: data
-		});
-		history.push('/login');
-	} catch (error) {
-		dispatch({
-			type: REGISTER_FAIL
-		});
+export const registerAction = (payload, history) => (dispatch) => {
+	const {email, password, password2} = payload
+	if(password === password2){
+
+		let db = JSON.parse(localStorage.getItem('db'))
+		if(!db){
+			db=[]
+		}
+		db.push({email, password})
+		localStorage.setItem('db', JSON.stringify(db))
+		try {
+			dispatch({
+				type: REGISTER_SUCCESS,
+				payload: db
+			});
+			history.push('/login');
+		} catch (error) {
+			dispatch({
+				type: REGISTER_FAIL
+			});
+		}
+	}else{
+		alert('passwords should match')
 	}
 };
 
