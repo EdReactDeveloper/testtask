@@ -23,7 +23,8 @@ export const getUserAction = (loggedIn) => (dispatch) => {
 	}
 };
 
-export const loginAction = (email, password, history) => (dispatch) => {
+export const loginAction = (payload, history) => (dispatch) => {
+	const {email, password} = payload
 	try {
 		const db = JSON.parse(localStorage.getItem('db'));
 		const allowed = db.findIndex(item => item.email === email && item.password === password) !== -1

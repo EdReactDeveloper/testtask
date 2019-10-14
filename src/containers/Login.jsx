@@ -3,16 +3,16 @@ import Login from '../components/Auth/LoginForm';
 import { connect } from 'react-redux';
 import { formFieldAction, touchAction } from '../store/actions/form'
 import { loginAction } from '../store/actions/auth';
-import { hashIt } from '../components/misc/hash';
 import {toArray} from '../components/misc/toArray';
-import { checkFields } from '../components/misc/checkFields';
 
 class LoginContainer extends Component {
 
   submitHandler = e => {
     e.preventDefault()
     const { loginAction, form, history } = this.props
-      loginAction(form.email.value, form.password.value, history)
+    const {email, password} = form
+    const payload = {email: email.value, password: password.value}
+      loginAction(payload, history)
   }
 
   fieldHandler = e => {
