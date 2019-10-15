@@ -55,6 +55,7 @@ export const sortAction = (sortby) => dispatch => {
 			payload: sortby
 		})
 		dispatch(goToPageAction(1))
+		dispatch(clearFieldAction())
 	} catch (error) {
 		console.log(error)
 	}
@@ -66,6 +67,8 @@ export const changePageSizeAction = (size) => dispatch => {
 		payload: Number(size)
 	})
 	dispatch(goToPageAction(1))
+	dispatch(clearFieldAction())
+
 }
 
 export const clearFieldAction = () => dispatch => {
