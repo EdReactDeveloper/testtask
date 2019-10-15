@@ -47,6 +47,7 @@ export const submitSearchAction = () => dispatch =>{
 }
 
 export const sortAction = (sortby) => dispatch =>{
+	
 	try {
 		dispatch({
 			type: SORTBY,

@@ -8,6 +8,7 @@ import {
 	LOGOUT_SUCCESS,
 	LOGOUT_FAIL
 } from '../actions/types';
+import {hashIt} from '../../components/misc/hash'
 
 export const getUserAction = (loggedIn) => (dispatch) => {
 	const token = JSON.parse(localStorage.getItem('token'));
@@ -24,10 +25,10 @@ export const getUserAction = (loggedIn) => (dispatch) => {
 };
 
 export const loginAction = (payload, history) => (dispatch) => {
-	const {email, password} = payload
+	const { email, password } = payload
 	try {
 		const db = JSON.parse(localStorage.getItem('db'));
-		const allowed = db.findIndex(item => item.email === email && item.password === password) !== -1
+		const allowed = db.findIndex(item => item.email === email && item.password === hashIt(password)) !== -1
 		if (allowed) {
 			localStorage.setItem('loggedIn', true);
 			const token = JSON.stringify(db)
@@ -37,7 +38,7 @@ export const loginAction = (payload, history) => (dispatch) => {
 				payload: db
 			});
 			history.push('/');
-		}else{
+		} else {
 			alert('wrong credentials')
 		}
 	} catch (error) {
@@ -48,27 +49,33 @@ export const loginAction = (payload, history) => (dispatch) => {
 };
 
 export const registerAction = (payload, history) => (dispatch) => {
-	const {email, password, password2} = payload
-	if(password === password2){
+	const { email, password, password2 } = payload
+	if (password === password2) {
 
 		let db = JSON.parse(localStorage.getItem('db'))
-		if(!db){
-			db=[]
+		if (!db) {
+			db = []
 		}
-		db.push({email, password})
-		localStorage.setItem('db', JSON.stringify(db))
-		try {
-			dispatch({
-				type: REGISTER_SUCCESS,
-				payload: db
-			});
-			history.push('/login');
-		} catch (error) {
-			dispatch({
-				type: REGISTER_FAIL
-			});
+		const exists = db.some(item => item.email === email)
+		if (exists) {
+			alert('use with this email already exists')
+		} else {
+
+			db.push({ email, password: hashIt(password) })
+			localStorage.setItem('db', JSON.stringify(db))
+			try {
+				dispatch({
+					type: REGISTER_SUCCESS,
+					payload: db
+				});
+				history.push('/login');
+			} catch (error) {
+				dispatch({
+					type: REGISTER_FAIL
+				});
+			}
 		}
-	}else{
+	} else {
 		alert('passwords should match')
 	}
 };
