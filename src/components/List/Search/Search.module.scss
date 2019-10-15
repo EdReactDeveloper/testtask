@@ -1,0 +1,26 @@
+.search{
+    display: flex;
+    padding: 10px; 
+    align-items: center;
+    & select {
+        margin-left: 5px;
+    }
+
+    &_wrapper{
+        position: relative;
+        width: 70%;
+    }
+    &_bar{
+        width: 100%;
+        padding-right: 120px;
+    }
+
+    &_btn{
+        position: absolute;
+        left: 100%;
+        top: 0;
+        width: 100px;
+        transform: translateX(-100%);
+        outline: none;
+    }
+}
