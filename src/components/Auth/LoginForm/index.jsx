@@ -1,10 +1,11 @@
 import React from 'react';
 import { Form, Button } from 'react-bootstrap';
 import Formfield from '../FormField';
+import style from '../Form.module.scss';
 
 const LoginForm = ({ fieldHandler, form, submitHandler, touchHandler }) => {
   return (
-    <Form onSubmit={submitHandler}>
+    <Form onSubmit={submitHandler} className={style.form_wrapper}>
       <h3>Login</h3>
 
       {form && form.map(item => {
