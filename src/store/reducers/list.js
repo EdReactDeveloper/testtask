@@ -8,7 +8,7 @@ import {
 	CHANGE_PAGE_SIZE 
 } from '../actions/types';
 import { changePage } from '../../components/misc/changePage';
-
+import {hashIt} from '../../components/misc/hash'
 const initialState = {
 	list: null,
 	isLoading: true,
@@ -58,7 +58,7 @@ const reducer = (state = initialState, action) => {
 
 		case SORTBY: {
 			const data = [...state.data]
-			data.sort((a,b) => (a[payload] > b[payload]) ? 1: -1 )
+			data.sort((a,b) => (a[payload] < b[payload]) ? -1 : (a[payload] > b[payload]) ? 1 : 0 )
 			const list = changePage(state.currentPage, state.pageSize, data);
 			return {
 				...state, data, list
