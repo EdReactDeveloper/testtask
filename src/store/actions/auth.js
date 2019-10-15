@@ -8,7 +8,8 @@ import {
 	LOGOUT_SUCCESS,
 	LOGOUT_FAIL
 } from '../actions/types';
-import {hashIt} from '../../components/misc/hash'
+import { hashIt } from '../../components/misc/hash'
+import { setAlertAction } from './alert';
 
 export const getUserAction = (loggedIn) => (dispatch) => {
 	const token = JSON.parse(localStorage.getItem('token'));
@@ -39,7 +40,7 @@ export const loginAction = (payload, history) => (dispatch) => {
 			});
 			history.push('/');
 		} else {
-			alert('wrong credentials')
+			dispatch(setAlertAction('wrong credentials', 'danger'))
 		}
 	} catch (error) {
 		dispatch({
@@ -57,23 +58,27 @@ export const registerAction = (payload, history) => (dispatch) => {
 			db = []
 		}
 		const exists = db.some(item => item.email === email)
-		if (exists) {
-			alert('use with this email already exists')
-		} else {
 
+		if (exists) {
+			dispatch(setAlertAction('use with this email already exists', 'danger'))
+		} else {
 			db.push({ email, password: hashIt(password) })
 			localStorage.setItem('db', JSON.stringify(db))
+
 			try {
 				dispatch({
 					type: REGISTER_SUCCESS,
 					payload: db
 				});
 				history.push('/login');
+				dispatch(setAlertAction('you have been registered, now log in', 'success'))
 			} catch (error) {
 				dispatch({
 					type: REGISTER_FAIL
 				});
+				dispatch(setAlertAction(error, 'danger'))
 			}
+			
 		}
 	} else {
 		alert('passwords should match')
@@ -90,5 +95,7 @@ export const logoutAction = () => (dispatch) => {
 		dispatch({
 			type: LOGOUT_FAIL
 		});
+		dispatch(setAlertAction(error, 'danger'))
+
 	}
 };

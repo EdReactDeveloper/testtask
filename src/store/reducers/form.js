@@ -1,5 +1,6 @@
-import { FORM_FIELD, TOUCHED } from '../actions/types';
+import { FORM_FIELD, TOUCHED, LOGIN_SUCCESS, REGISTER_SUCCESS } from '../actions/types';
 import { validate } from '../../components/misc/validation';
+
 const initialState = {
 	email: {
 		type: 'email',
@@ -41,6 +42,21 @@ const reducer = (state = initialState, action) => {
 			element.error = validate(element)[1]
 			element.touched = true
 			return {...state, [payload]: element}
+		}
+
+		case LOGIN_SUCCESS: 
+		case REGISTER_SUCCESS: 
+		{
+			const fields = {...state}
+			for(let key in fields){
+				fields[key].value = ''
+			}
+			return {
+				...state, 
+				email: fields.email, 
+				password: fields.password, 
+				password2: fields.password2
+			}
 		}
 		
 		default:

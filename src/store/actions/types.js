@@ -20,3 +20,6 @@ export const FETCH_SEARCH = 'FETCH_SEARCH'
 export const SUBMIT_SEARCH = 'SUBMIT_SEARCH'
 export const SORTBY = 'SORTBY'
 export const CHANGE_PAGE_SIZE = 'CHANGE_PAGE_SIZE'
+
+export const SET_ALERT = 'SET_ALERT'
+export const REMOVE_ALERT = 'REMOVE_ALERT'

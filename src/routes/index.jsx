@@ -8,12 +8,14 @@ import PrivateRoute from './PrivateRoute';
 import List from '../containers/List';
 import Layout from '../components/Layout';
 import Footer from '../components/Footer'; 
+import Alert from '../components/Alert'; 
 
-const Routes = ({ isAuthorized }) => {
+const Routes = ({ isAuthorized, alerts }) => {
   return (
     <Router>
       <Header />
       <Layout>
+        <Alert alerts={alerts}/>
         <Switch>
           <Route exact path='/login' component={Login} />
           <Route exact path='/register' component={Register} />
@@ -26,7 +28,8 @@ const Routes = ({ isAuthorized }) => {
 };
 
 const mapStateToProps = state => ({
-  isAuthorized: state.auth.isAuthorized
+  isAuthorized: state.auth.isAuthorized,
+  alerts: state.alert
 })
 
 export default connect(mapStateToProps)(Routes);
