@@ -5,10 +5,11 @@ import {
 	FETCH_SEARCH, 
 	SUBMIT_SEARCH, 
 	SORTBY, 
-	CHANGE_PAGE_SIZE 
+	CHANGE_PAGE_SIZE,
+	CLEAR_FIELD 
 } from '../actions/types';
 import { changePage } from '../../components/misc/changePage';
-import {hashIt} from '../../components/misc/hash'
+
 const initialState = {
 	list: null,
 	isLoading: true,
@@ -74,6 +75,10 @@ const reducer = (state = initialState, action) => {
 			return {
 				...state, pageSize: payload, pages, list, pageSize, currentPage
 			}
+		}
+
+		case CLEAR_FIELD: {
+			return {...state, search: ''}
 		}
 
 		default:

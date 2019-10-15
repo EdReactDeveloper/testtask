@@ -7,7 +7,8 @@ import {
   fetchSearchAction,
   submitSearchAction,
   sortAction,
-  changePageSizeAction
+  changePageSizeAction,
+  clearFieldAction
 } from '../store/actions/list';
 import Pages from '../components/List/Pages';
 import Search from '../components/List/Search';
@@ -36,7 +37,8 @@ class ListContainer extends Component {
       fetchSearchAction,
       sortAction,
       pageSize,
-      changePageSizeAction
+      changePageSizeAction,
+      clearFieldAction
     } = this.props
 
     return (
@@ -46,6 +48,7 @@ class ListContainer extends Component {
           fetchSearchAction={fetchSearchAction}
           submitSearch={this.submitSearch}
           sortAction={sortAction}
+          clearFieldAction={clearFieldAction}
         />
         <List
           list={list}
@@ -80,5 +83,5 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps, { 
   fetchListAction, goToPageAction, 
   fetchSearchAction, submitSearchAction, 
-  sortAction, changePageSizeAction 
+  sortAction, changePageSizeAction, clearFieldAction
 })(ListContainer);

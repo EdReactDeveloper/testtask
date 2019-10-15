@@ -1,11 +1,12 @@
-import { 
-	FETCH_LIST_SUCCESS, 
-	FETCH_LIST_FAIL, 
+import {
+	FETCH_LIST_SUCCESS,
+	FETCH_LIST_FAIL,
 	GO_TO_PAGE,
 	FETCH_SEARCH,
 	SUBMIT_SEARCH,
 	SORTBY,
-	CHANGE_PAGE_SIZE
+	CHANGE_PAGE_SIZE,
+	CLEAR_FIELD
 } from './types';
 import axios from 'axios';
 
@@ -25,7 +26,7 @@ export const fetchListAction = () => async (dispatch) => {
 	}
 };
 
-export const goToPageAction = (number)=> dispatch=>{
+export const goToPageAction = (number) => dispatch => {
 
 	dispatch({
 		type: GO_TO_PAGE,
@@ -33,21 +34,21 @@ export const goToPageAction = (number)=> dispatch=>{
 	})
 }
 
-export const fetchSearchAction = data => dispatch =>{
+export const fetchSearchAction = data => dispatch => {
 	dispatch({
 		type: FETCH_SEARCH,
 		payload: data
 	})
 }
 
-export const submitSearchAction = () => dispatch =>{
+export const submitSearchAction = () => dispatch => {
 	dispatch({
 		type: SUBMIT_SEARCH
 	})
 }
 
-export const sortAction = (sortby) => dispatch =>{
-	
+export const sortAction = (sortby) => dispatch => {
+
 	try {
 		dispatch({
 			type: SORTBY,
@@ -57,12 +58,20 @@ export const sortAction = (sortby) => dispatch =>{
 	} catch (error) {
 		console.log(error)
 	}
-} 
+}
 
-export const changePageSizeAction = (size) => dispatch =>{
+export const changePageSizeAction = (size) => dispatch => {
 	dispatch({
 		type: CHANGE_PAGE_SIZE,
-		payload: Number(size)		
+		payload: Number(size)
 	})
 	dispatch(goToPageAction(1))
+}
+
+export const clearFieldAction = () => dispatch => {
+
+	dispatch({
+		type: CLEAR_FIELD
+	})
+	dispatch(submitSearchAction())
 }

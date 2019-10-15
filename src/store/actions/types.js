@@ -9,6 +9,7 @@ export const LOGOUT_FAIL = 'LOGOUT_FAIL';
 
 export const FORM_FIELD = 'FORM_FIELD';
 export const TOUCHED = 'TOUCHED'
+export const CLEAR_FIELD = 'CLEAR_FIELD'
 
 export const GET_USER_SUCCESS = 'GET_USER_SUCCESS';
 export const GET_USER_FAIL = 'GET_USER_FAIL';
