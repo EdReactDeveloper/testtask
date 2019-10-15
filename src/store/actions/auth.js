@@ -32,8 +32,8 @@ export const loginAction = (payload, history) => (dispatch) => {
 		const allowed = db.findIndex(item => item.email === email && item.password === hashIt(password)) !== -1
 		if (allowed) {
 			localStorage.setItem('loggedIn', true);
-			const token = JSON.stringify(db)
-			localStorage.setItem('token', token);
+			const token = db.find(item => item.email === email)
+			localStorage.setItem('token', JSON.stringify(token));
 			dispatch({
 				type: LOGIN_SUCCESS,
 				payload: db
