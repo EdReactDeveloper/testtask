@@ -81,7 +81,7 @@ export const registerAction = (payload, history) => (dispatch) => {
 			
 		}
 	} else {
-		alert('passwords should match')
+		dispatch(setAlertAction('passwords should match', 'danger'))
 	}
 };
 
