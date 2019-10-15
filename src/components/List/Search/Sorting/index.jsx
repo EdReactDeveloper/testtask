@@ -10,7 +10,7 @@ const options = [
 const Sorting = ({ sortAction }) => {
     return (
         <Form.Control as="select" onChange={(e) => sortAction(e.target.value)} className={style.select}>
-            {options.map(item => <option value={item.value}>{item.text}</option>)}
+            {options.map(item => <option key={item.value} value={item.value}>{item.text}</option>)}
         </Form.Control >
     )
 }
