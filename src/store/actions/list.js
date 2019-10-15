@@ -53,15 +53,16 @@ export const sortAction = (sortby) => dispatch =>{
 			type: SORTBY,
 			payload: sortby
 		})
+		dispatch(goToPageAction(1))
 	} catch (error) {
 		console.log(error)
 	}
 } 
 
 export const changePageSizeAction = (size) => dispatch =>{
-	
 	dispatch({
 		type: CHANGE_PAGE_SIZE,
 		payload: Number(size)		
 	})
+	dispatch(goToPageAction(1))
 }
