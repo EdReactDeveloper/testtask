@@ -22,6 +22,7 @@ export const getUserAction = (loggedIn) => (dispatch) => {
 		dispatch({
 			type: GET_USER_FAIL
 		});
+		dispatch(setAlertAction(error, 'danger'))
 	}
 };
 
@@ -46,6 +47,7 @@ export const loginAction = (payload, history) => (dispatch) => {
 		dispatch({
 			type: LOGIN_FAIL
 		});
+		dispatch(setAlertAction(error, 'danger'))
 	}
 };
 

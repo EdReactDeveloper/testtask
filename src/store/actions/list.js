@@ -9,6 +9,7 @@ import {
 	CLEAR_FIELD
 } from './types';
 import axios from 'axios';
+import {setAlertAction} from './alert'; 
 
 export const fetchListAction = () => async (dispatch) => {
 	try {
@@ -23,6 +24,8 @@ export const fetchListAction = () => async (dispatch) => {
 		dispatch({
 			type: FETCH_LIST_FAIL
 		});
+		dispatch(setAlertAction(error, 'danger'))
+
 	}
 };
 
@@ -57,7 +60,7 @@ export const sortAction = (sortby) => dispatch => {
 		dispatch(goToPageAction(1))
 		dispatch(clearFieldAction())
 	} catch (error) {
-		console.log(error)
+		dispatch(setAlertAction(error, 'danger'))
 	}
 }
 
