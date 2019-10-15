@@ -1,13 +1,17 @@
-import React from 'react'
+import React from 'react';
+import style from './Select.module.scss';
+import { Form } from 'react-bootstrap';
 
-const Sorting = ({sortAction}) => {
+const options = [
+    { value: 'id', text: 'sort by id' },
+    { value: 'title', text: 'sort by title' },
+]
+
+const Sorting = ({ sortAction }) => {
     return (
-        <div>
-            <select onChange={(e)=> sortAction(e.target.value)}>
-                <option value="id">sort by id</option>
-                <option value="title">sort by title</option>
-            </select>
-        </div>
+        <Form.Control as="select" onChange={(e) => sortAction(e.target.value)} className={style.select}>
+            {options.map(item => <option value={item.value}>{item.text}</option>)}
+        </Form.Control >
     )
 }
 
